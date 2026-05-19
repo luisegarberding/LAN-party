@@ -9,11 +9,15 @@ type ChatMessage = {
 
 const SYSTEM_PROMPT = `You are "Frag TRUMPF", the official AI assistant for TRUMPF — a German high-tech company specializing in machine tools, laser technology, and electronics for industrial manufacturing. You have particular expertise about the TRUMPF Cutting Assistant, an AI-based cutting-edge optimization product for 2D laser cutting machines.
 
+You also act as the "Cutting Coach" — a teaching mode of the Cutting Assistant. When a user asks why a parameter matters or why a cut behaves a certain way, you explain the underlying physics in plain language (1–3 short paragraphs) and link cause to effect: e.g. how gas pressure / focal position / cutting speed / laser power interact with burr formation, edge roughness, and melt ejection. The goal is to transfer expertise to the operator, not to replace it.
+
 YOUR ALLOWED SCOPE:
 - TRUMPF as a company (history, business areas, locations, contact, sales/service in Ditzingen, Germany).
 - TRUMPF products and solutions in general (machines, lasers, software, services).
 - The TRUMPF Cutting Assistant in particular: features, AI mode, Bandwidth mode, supported materials, sheet thicknesses, dialog-guided workflow, the handheld scanner that measures burr height and roughness in micrometers.
 - Sheet-metal processing and 2D laser cutting in the context of TRUMPF products.
+- Laser-cutting physics related to parameter recommendations: kerf, burr formation, oxidation, melt ejection, focal position, cutting gases (N₂ vs O₂), cutting speed, gas pressure, laser power, beam quality.
+- The sustainability impact of the Cutting Assistant: reduced scrap, fewer trial cuts, lower energy consumption per good part.
 - How to contact TRUMPF sales or service.
 
 KEY FACTS about the Cutting Assistant (use these — do not invent others):
@@ -50,6 +54,7 @@ let isOpen = false;
 let isSending = false;
 let currentLang: LangCode = "de";
 let mounted = false;
+let lastSource: "gemini" | "groq" | "openrouter" | "offline" | null = null;
 
 function loadHistory(): ChatMessage[] {
   try {
@@ -114,6 +119,23 @@ function renderMessages(): string {
     .map((line) => `<div class="cb-bubble cb-bubble--bot">${escape(line)}</div>`)
     .join("");
 
+  const quickReplies =
+    history.length === 0 && t.chatbot.quickReplies?.length
+      ? `
+        <div class="cb-quick-replies">
+          <div class="cb-quick-replies-label">${escape(t.chatbot.quickRepliesLabel)}</div>
+          <div class="cb-quick-replies-list">
+            ${t.chatbot.quickReplies
+              .map(
+                (q) =>
+                  `<button type="button" class="cb-chip" data-chip="${escape(q)}">${escape(q)}</button>`,
+              )
+              .join("")}
+          </div>
+        </div>
+      `
+      : "";
+
   const conversationBubbles = history
     .map((m) => {
       const cls = m.role === "user" ? "cb-bubble--user" : "cb-bubble--bot";
@@ -125,7 +147,7 @@ function renderMessages(): string {
     ? `<div class="cb-bubble cb-bubble--bot cb-typing"><span></span><span></span><span></span></div>`
     : "";
 
-  return welcomeBubbles + conversationBubbles + typing;
+  return welcomeBubbles + quickReplies + conversationBubbles + typing;
 }
 
 function renderPanel(): string {
@@ -136,6 +158,11 @@ function renderPanel(): string {
         <div class="cb-brand">
           <span class="cb-logo-mark"></span>
           <span class="cb-title">${escape(t.chatbot.title)}</span>
+          ${
+            lastSource === "offline"
+              ? `<span class="cb-source-chip" title="${escape(t.chatbot.demoMode)}">${escape(t.chatbot.demoMode)}</span>`
+              : ""
+          }
         </div>
         <div class="cb-header-actions">
           <button class="cb-icon-btn" id="cb-reset" type="button" title="${escape(t.chatbot.reset)}" aria-label="${escape(t.chatbot.reset)}">
@@ -204,6 +231,7 @@ function attachEvents(): void {
 
   document.getElementById("cb-reset")?.addEventListener("click", () => {
     history = [];
+    lastSource = null;
     saveHistory();
     render();
   });
@@ -216,6 +244,15 @@ function attachEvents(): void {
     if (!text || isSending) return;
     input.value = "";
     void sendMessage(text);
+  });
+
+  document.querySelectorAll<HTMLButtonElement>(".cb-chip").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (isSending) return;
+      const text = btn.dataset.chip?.trim();
+      if (!text) return;
+      void sendMessage(text);
+    });
   });
 }
 
@@ -238,7 +275,11 @@ async function sendMessage(userText: string): Promise<void> {
       body: JSON.stringify({ messages }),
     });
 
-    const data = (await res.json()) as { reply?: string; error?: string };
+    const data = (await res.json()) as {
+      reply?: string;
+      error?: string;
+      source?: "gemini" | "groq" | "openrouter" | "offline";
+    };
 
     if (!res.ok || data.error) {
       history.push({
@@ -246,6 +287,7 @@ async function sendMessage(userText: string): Promise<void> {
         content: `${t.chatbot.error}${data.error ? `\n(${data.error})` : ""}`,
       });
     } else {
+      if (data.source) lastSource = data.source;
       history.push({
         role: "assistant",
         content: data.reply ?? t.chatbot.error,

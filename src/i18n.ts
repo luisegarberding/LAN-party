@@ -148,6 +148,9 @@ export type Translation = {
     launcher: string;
     typing: string;
     error: string;
+    demoMode: string;
+    quickRepliesLabel: string;
+    quickReplies: string[];
   };
 };
 
@@ -360,6 +363,14 @@ export const translations: Record<LangCode, Translation> = {
       launcher: "Chat öffnen",
       typing: "tippt…",
       error: "Es gab ein Problem. Bitte versuchen Sie es später erneut.",
+      demoMode: "Demo-Modus",
+      quickRepliesLabel: "Schnelle Fragen",
+      quickReplies: [
+        "Was ist der Cutting Assistant?",
+        "Welche Materialien werden unterstützt?",
+        "Wie funktioniert die KI-Optimierung?",
+        "Wie reduziert er Ausschuss und CO₂?",
+      ],
     },
   },
 
@@ -571,6 +582,14 @@ export const translations: Record<LangCode, Translation> = {
       launcher: "Open chat",
       typing: "typing…",
       error: "Something went wrong. Please try again later.",
+      demoMode: "Demo mode",
+      quickRepliesLabel: "Quick questions",
+      quickReplies: [
+        "What is the Cutting Assistant?",
+        "Which materials are supported?",
+        "How does the AI optimization work?",
+        "How does it reduce scrap and CO₂?",
+      ],
     },
   },
 
@@ -782,6 +801,14 @@ export const translations: Record<LangCode, Translation> = {
       launcher: "Abrir chat",
       typing: "escribiendo…",
       error: "Algo salió mal. Inténtelo de nuevo.",
+      demoMode: "Modo demo",
+      quickRepliesLabel: "Preguntas rápidas",
+      quickReplies: [
+        "¿Qué es el Cutting Assistant?",
+        "¿Qué materiales son compatibles?",
+        "¿Cómo funciona la optimización con IA?",
+        "¿Cómo reduce los desechos y el CO₂?",
+      ],
     },
   },
 
@@ -993,6 +1020,14 @@ export const translations: Record<LangCode, Translation> = {
       launcher: "Ouvrir le chat",
       typing: "écrit…",
       error: "Une erreur est survenue. Veuillez réessayer.",
+      demoMode: "Mode démo",
+      quickRepliesLabel: "Questions rapides",
+      quickReplies: [
+        "Qu'est-ce que le Cutting Assistant ?",
+        "Quels matériaux sont pris en charge ?",
+        "Comment fonctionne l'optimisation par IA ?",
+        "Comment réduit-il les rebuts et le CO₂ ?",
+      ],
     },
   },
 
@@ -1204,6 +1239,14 @@ export const translations: Record<LangCode, Translation> = {
       launcher: "Открыть чат",
       typing: "печатает…",
       error: "Что-то пошло не так. Попробуйте позже.",
+      demoMode: "Демо-режим",
+      quickRepliesLabel: "Быстрые вопросы",
+      quickReplies: [
+        "Что такое Cutting Assistant?",
+        "Какие материалы поддерживаются?",
+        "Как работает оптимизация на ИИ?",
+        "Как он снижает отходы и CO₂?",
+      ],
     },
   },
 
@@ -1415,6 +1458,14 @@ export const translations: Record<LangCode, Translation> = {
       launcher: "افتح الدردشة",
       typing: "يكتب…",
       error: "حدث خطأ ما. حاول مرة أخرى لاحقًا.",
+      demoMode: "وضع تجريبي",
+      quickRepliesLabel: "أسئلة سريعة",
+      quickReplies: [
+        "ما هو Cutting Assistant؟",
+        "ما هي المواد المدعومة؟",
+        "كيف تعمل عملية التحسين بالذكاء الاصطناعي؟",
+        "كيف يقلل النفايات وانبعاثات CO₂؟",
+      ],
     },
   },
 
@@ -1625,6 +1676,14 @@ export const translations: Record<LangCode, Translation> = {
       launcher: "चैट खोलें",
       typing: "लिख रहा है…",
       error: "कुछ गलत हो गया। कृपया बाद में पुनः प्रयास करें।",
+      demoMode: "डेमो मोड",
+      quickRepliesLabel: "त्वरित प्रश्न",
+      quickReplies: [
+        "Cutting Assistant क्या है?",
+        "कौन-कौन सी सामग्री समर्थित हैं?",
+        "AI ऑप्टिमाइज़ेशन कैसे काम करता है?",
+        "यह स्क्रैप और CO₂ कैसे कम करता है?",
+      ],
     },
   },
 };
