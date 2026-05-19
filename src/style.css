@@ -2217,3 +2217,309 @@ html[dir="rtl"] .cb-send svg {
     height: calc(100vh - 110px);
   }
 }
+
+/* ============================================================
+   Cutting Coach — feature card + modal
+   ============================================================ */
+
+.card--feature {
+  position: relative;
+  cursor: pointer;
+  border-color: var(--trumpf-blue);
+  box-shadow: 0 0 0 1px rgba(0, 121, 193, 0.12);
+  outline: none;
+}
+
+.card--feature:hover,
+.card--feature:focus-visible {
+  box-shadow: 0 12px 32px rgba(0, 121, 193, 0.18);
+  transform: translateY(-3px);
+  border-color: var(--trumpf-blue);
+}
+
+.card--feature:focus-visible {
+  outline: 3px solid rgba(0, 121, 193, 0.35);
+  outline-offset: 2px;
+}
+
+.card--feature .card-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-badge {
+  position: absolute;
+  top: 12px;
+  inset-inline-start: 12px;
+  z-index: 2;
+  background: var(--trumpf-lime);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  line-height: 1.4;
+}
+
+.card-cta {
+  margin-top: 14px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--trumpf-blue);
+  font: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.15s ease, color 0.15s ease;
+}
+
+.card-cta:hover,
+.card-cta:focus-visible {
+  color: var(--trumpf-blue-dark);
+  gap: 10px;
+  outline: none;
+}
+
+.card--feature em,
+.coach-modal em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--trumpf-blue);
+}
+
+/* ---------- Modal ---------- */
+
+body.coach-modal-open {
+  overflow: hidden;
+}
+
+.coach-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.coach-modal[hidden] {
+  display: none;
+}
+
+.coach-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 22, 40, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: coachFade 0.18s ease-out;
+}
+
+@keyframes coachFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes coachRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.coach-modal__panel {
+  position: relative;
+  width: min(640px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+  padding: 32px;
+  animation: coachRise 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.coach-modal__close {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.coach-modal__close:hover {
+  background: var(--bg-soft);
+  color: var(--ink);
+}
+
+.coach-modal__header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.coach-modal__badge {
+  align-self: flex-start;
+  background: var(--trumpf-lime);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  line-height: 1.4;
+}
+
+.coach-modal__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--trumpf-blue);
+}
+
+.coach-modal__panel h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.coach-modal__lead {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+.coach-modal__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.coach-modal__bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.coach-modal__bullets svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--trumpf-blue);
+}
+
+.coach-modal__try {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  margin-bottom: 22px;
+}
+
+.coach-modal__try-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  margin-bottom: 10px;
+}
+
+.coach-modal__suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.coach-chip {
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.35;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: start;
+  transition: background-color 0.12s ease, border-color 0.12s ease,
+    color 0.12s ease, transform 0.05s ease;
+}
+
+.coach-chip:hover,
+.coach-chip:focus-visible {
+  background: #fff;
+  border-color: var(--trumpf-blue);
+  color: var(--trumpf-blue);
+  outline: none;
+}
+
+.coach-chip:active {
+  transform: scale(0.98);
+}
+
+.coach-modal__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* RTL adjustments */
+html[dir="rtl"] .card-cta span {
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] .coach-modal__close {
+  inset-inline-end: auto;
+  inset-inline-start: 12px;
+}
+
+@media (max-width: 560px) {
+  .coach-modal {
+    padding: 12px;
+  }
+  .coach-modal__panel {
+    padding: 24px 20px;
+    border-radius: 8px;
+  }
+  .coach-modal__panel h2 {
+    font-size: 24px;
+  }
+  .coach-modal__actions .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}

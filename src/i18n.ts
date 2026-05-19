@@ -35,7 +35,18 @@ export type Translation = {
   advantages: {
     title: string;
     subtitle: string;
-    items: { title: string; body: string }[];
+    items: { title: string; body: string; cta?: string }[];
+  };
+  coach: {
+    badge: string;
+    eyebrow: string;
+    title: string;
+    lead: string;
+    bullets: string[];
+    tryAsking: string;
+    suggestions: string[];
+    askButton: string;
+    closeButton: string;
   };
   how: {
     title: string;
@@ -191,10 +202,31 @@ export const translations: Record<LangCode, Translation> = {
           body: "Der Cutting Assistant schlägt passende Optimierungen vor — ob für Sondermaterialien oder Materialien mit schwankender Qualität.",
         },
         {
-          title: "Schnelle Prüfung der Schnittkantenqualität",
-          body: "Der Handscanner ermöglicht eine objektive Beurteilung der Bauteilqualität. Rauheit und Bartöhe werden in Mikrometern angezeigt.",
+          title: "Cutting Coach — Ihr KI-Lehrmodus",
+          body: "Nicht nur bessere Schnitte — besseres Verständnis. Der Coach erklärt, *warum* jede Parameteränderung wirkt, und macht so jeden Bediener mit der Zeit zum Experten.",
+          cta: "Mehr erfahren",
         },
       ],
+    },
+    coach: {
+      badge: "NEU",
+      eyebrow: "Kommt als Nächstes",
+      title: "Cutting Coach",
+      lead: "Der Cutting Assistant sagt Ihnen, *was* Sie ändern sollen. Der Cutting Coach erklärt, *warum* — so wächst das Know-how Ihres Teams mit jedem Schnitt.",
+      bullets: [
+        "Physik in einfachen Worten: Fokuslage, Gasdruck, Geschwindigkeit, Schmelzaustreibung",
+        "Audit-Trail: jede Parameteränderung verknüpft mit einem messbaren Fehler",
+        "Sustainability Twin: Ausschuss, Energie und CO₂-Einsparungen pro Schicht verfolgen",
+        "Wissensaufbau im Betrieb — auch wenn die erfahrene Bedienerin im Urlaub ist",
+      ],
+      tryAsking: "Fragen Sie den Coach:",
+      suggestions: [
+        "Warum ist die Fokuslage beim Schneiden von 8 mm Baustahl wichtig?",
+        "Wie erreiche ich eine sauberere Kante bei Edelstahl?",
+        "Wie reduziert der Cutting Assistant Ausschuss und CO₂?",
+      ],
+      askButton: "Coach fragen",
+      closeButton: "Schließen",
     },
     how: {
       title: "Einfache Bedienung, dialoggeführt",
@@ -410,10 +442,31 @@ export const translations: Record<LangCode, Translation> = {
           body: "The Cutting Assistant suggests suitable optimizations — whether for special materials or materials with fluctuating quality.",
         },
         {
-          title: "Quick inspection of cutting-edge quality",
-          body: "The handheld scanner allows an objective assessment of part quality. The Cutting Assistant displays roughness and burr height in micrometers.",
+          title: "Cutting Coach — your AI teaching mode",
+          body: "Not just better cuts — better understanding. The Coach explains *why* each parameter change matters, turning every operator into an expert over time.",
+          cta: "Learn more",
         },
       ],
+    },
+    coach: {
+      badge: "NEW",
+      eyebrow: "Coming next",
+      title: "Cutting Coach",
+      lead: "The Cutting Assistant tells you *what* to change. The Cutting Coach explains *why* — so your team grows expertise with every cut.",
+      bullets: [
+        "Plain-language physics: focus position, gas pressure, speed, melt ejection",
+        "Audit trail: every parameter change linked to a measurable defect",
+        "Sustainability Twin: track scrap, energy and CO₂ saved per shift",
+        "On-the-job training that scales — even when the senior operator is on vacation",
+      ],
+      tryAsking: "Try asking the Coach:",
+      suggestions: [
+        "Why does focus position matter when cutting 8 mm mild steel?",
+        "How do I get a cleaner edge on stainless steel?",
+        "How does the Cutting Assistant reduce scrap and CO₂?",
+      ],
+      askButton: "Ask the Coach",
+      closeButton: "Close",
     },
     how: {
       title: "Easy handling, dialog-guided",
@@ -629,10 +682,31 @@ export const translations: Record<LangCode, Translation> = {
           body: "El Cutting Assistant propone optimizaciones adecuadas — ya sea para materiales especiales o de calidad fluctuante.",
         },
         {
-          title: "Inspección rápida de la calidad del borde",
-          body: "El escáner manual permite una evaluación objetiva de la calidad. El Cutting Assistant muestra rugosidad y altura de rebaba en micrómetros.",
+          title: "Cutting Coach — su modo de aprendizaje con IA",
+          body: "No solo mejores cortes — mejor comprensión. El Coach explica *por qué* importa cada cambio de parámetro, convirtiendo a cada operario en experto con el tiempo.",
+          cta: "Saber más",
         },
       ],
+    },
+    coach: {
+      badge: "NUEVO",
+      eyebrow: "Próximamente",
+      title: "Cutting Coach",
+      lead: "El Cutting Assistant le dice *qué* cambiar. El Cutting Coach explica *por qué* — y así su equipo gana experiencia con cada corte.",
+      bullets: [
+        "Física en lenguaje claro: posición focal, presión de gas, velocidad, expulsión de fusión",
+        "Trazabilidad: cada cambio de parámetro vinculado a un defecto medible",
+        "Sustainability Twin: rastree desperdicio, energía y CO₂ ahorrados por turno",
+        "Formación práctica que escala — incluso cuando el operario senior está de vacaciones",
+      ],
+      tryAsking: "Pregunte al Coach:",
+      suggestions: [
+        "¿Por qué importa la posición focal al cortar acero suave de 8 mm?",
+        "¿Cómo obtengo un borde más limpio en acero inoxidable?",
+        "¿Cómo reduce el Cutting Assistant el desperdicio y el CO₂?",
+      ],
+      askButton: "Preguntar al Coach",
+      closeButton: "Cerrar",
     },
     how: {
       title: "Manejo sencillo y guiado por diálogo",
@@ -848,10 +922,31 @@ export const translations: Record<LangCode, Translation> = {
           body: "Le Cutting Assistant propose des optimisations adaptées — pour des matériaux spéciaux ou à qualité fluctuante.",
         },
         {
-          title: "Inspection rapide de la qualité du bord",
-          body: "Le scanner portatif permet une évaluation objective de la pièce. Rugosité et hauteur de bavure sont affichées en micromètres.",
+          title: "Cutting Coach — votre mode d'apprentissage IA",
+          body: "Pas seulement de meilleures coupes — une meilleure compréhension. Le Coach explique *pourquoi* chaque changement de paramètre compte, faisant de chaque opérateur un expert au fil du temps.",
+          cta: "En savoir plus",
         },
       ],
+    },
+    coach: {
+      badge: "NOUVEAU",
+      eyebrow: "Bientôt disponible",
+      title: "Cutting Coach",
+      lead: "Le Cutting Assistant vous dit *quoi* changer. Le Cutting Coach explique *pourquoi* — votre équipe gagne en expertise à chaque coupe.",
+      bullets: [
+        "Physique en langage clair : position focale, pression du gaz, vitesse, éjection du bain de fusion",
+        "Traçabilité : chaque changement de paramètre relié à un défaut mesurable",
+        "Sustainability Twin : rebuts, énergie et CO₂ économisés par poste",
+        "Formation sur le terrain qui passe à l'échelle — même quand l'opérateur senior est en congé",
+      ],
+      tryAsking: "Demandez au Coach :",
+      suggestions: [
+        "Pourquoi la position focale est-elle importante pour de l'acier doux de 8 mm ?",
+        "Comment obtenir un bord plus net sur de l'inox ?",
+        "Comment le Cutting Assistant réduit-il les rebuts et le CO₂ ?",
+      ],
+      askButton: "Demander au Coach",
+      closeButton: "Fermer",
     },
     how: {
       title: "Maniement simple et guidé par dialogue",
@@ -1067,10 +1162,31 @@ export const translations: Record<LangCode, Translation> = {
           body: "Cutting Assistant предлагает подходящие оптимизации — для спецматериалов или материалов с переменным качеством.",
         },
         {
-          title: "Быстрая проверка качества кромки",
-          body: "Ручной сканер позволяет объективно оценить деталь. Шероховатость и высота грата отображаются в микрометрах.",
+          title: "Cutting Coach — обучающий режим ИИ",
+          body: "Не просто лучшие резы — лучшее понимание. Coach объясняет, *почему* важно каждое изменение параметра, превращая каждого оператора в эксперта со временем.",
+          cta: "Узнать больше",
         },
       ],
+    },
+    coach: {
+      badge: "НОВОЕ",
+      eyebrow: "Скоро",
+      title: "Cutting Coach",
+      lead: "Cutting Assistant подсказывает, *что* изменить. Cutting Coach объясняет, *почему* — и ваша команда растёт в экспертизе с каждым резом.",
+      bullets: [
+        "Физика простыми словами: фокус, давление газа, скорость, выброс расплава",
+        "Аудит: каждое изменение параметра связано с измеримым дефектом",
+        "Sustainability Twin: отходы, энергия и CO₂ за смену",
+        "Обучение на рабочем месте — даже когда старший оператор в отпуске",
+      ],
+      tryAsking: "Спросите у Coach:",
+      suggestions: [
+        "Почему важна фокусная позиция при резке 8 мм низкоуглеродистой стали?",
+        "Как получить более чистую кромку на нержавейке?",
+        "Как Cutting Assistant сокращает отходы и CO₂?",
+      ],
+      askButton: "Спросить Coach",
+      closeButton: "Закрыть",
     },
     how: {
       title: "Простое управление, диалоговое",
@@ -1286,10 +1402,31 @@ export const translations: Record<LangCode, Translation> = {
           body: "يقترح Cutting Assistant تحسينات مناسبة — للمواد الخاصة أو ذات الجودة المتفاوتة.",
         },
         {
-          title: "فحص سريع لجودة حافة القطع",
-          body: "يتيح الماسح اليدوي تقييماً موضوعياً للقطعة. ويعرض المساعد الخشونة وارتفاع الأشواك بالميكرومتر.",
+          title: "Cutting Coach — وضع التعلّم بالذكاء الاصطناعي",
+          body: "ليس فقط قطعاً أفضل — بل فهماً أعمق. يشرح Coach *لماذا* يهم كل تغيير في الإعدادات، ليحوّل كل مشغّل إلى خبير مع الوقت.",
+          cta: "اعرف المزيد",
         },
       ],
+    },
+    coach: {
+      badge: "جديد",
+      eyebrow: "قريباً",
+      title: "Cutting Coach",
+      lead: "Cutting Assistant يخبرك *بما* يجب تغييره. أما Cutting Coach فيشرح *لماذا* — ليكتسب فريقك الخبرة مع كل عملية قطع.",
+      bullets: [
+        "الفيزياء بلغة بسيطة: موضع البؤرة، ضغط الغاز، السرعة، طرد المنصهر",
+        "تتبع التغييرات: كل تعديل مرتبط بعيب قابل للقياس",
+        "Sustainability Twin: تتبع النفايات والطاقة وانبعاثات CO₂ لكل وردية",
+        "تدريب أثناء العمل قابل للتوسع — حتى عند غياب المشغل الخبير",
+      ],
+      tryAsking: "اسأل Coach:",
+      suggestions: [
+        "لماذا يهم موضع البؤرة عند قطع فولاذ طري بسماكة 8 مم؟",
+        "كيف أحصل على حافة أنظف على الفولاذ المقاوم للصدأ؟",
+        "كيف يقلل Cutting Assistant النفايات وانبعاثات CO₂؟",
+      ],
+      askButton: "اسأل Coach",
+      closeButton: "إغلاق",
     },
     how: {
       title: "تشغيل بسيط وموجَّه بالحوار",
@@ -1505,10 +1642,31 @@ export const translations: Record<LangCode, Translation> = {
           body: "Cutting Assistant उपयुक्त ऑप्टिमाइज़ेशन सुझाता है — विशेष या उतार-चढ़ाव वाली सामग्री के लिए।",
         },
         {
-          title: "कटिंग-एज क्वालिटी की त्वरित जाँच",
-          body: "हैंडहेल्ड स्कैनर पार्ट क्वालिटी का वस्तुनिष्ठ मूल्यांकन देता है। रफनेस और बर्र-ऊँचाई माइक्रोमीटर में दिखाई जाती हैं।",
+          title: "Cutting Coach — आपका AI शिक्षण मोड",
+          body: "सिर्फ बेहतर कटिंग नहीं — बेहतर समझ। Coach बताता है कि हर पैरामीटर बदलाव *क्यों* मायने रखता है, और हर ऑपरेटर को समय के साथ विशेषज्ञ बनाता है।",
+          cta: "और जानें",
         },
       ],
+    },
+    coach: {
+      badge: "नया",
+      eyebrow: "जल्द ही",
+      title: "Cutting Coach",
+      lead: "Cutting Assistant आपको बताता है *क्या* बदलना है। Cutting Coach समझाता है *क्यों* — ताकि हर कटिंग के साथ टीम का ज्ञान बढ़े।",
+      bullets: [
+        "सरल भाषा में फिज़िक्स: फोकस पोज़िशन, गैस प्रेशर, स्पीड, मेल्ट इजेक्शन",
+        "ऑडिट ट्रेल: हर पैरामीटर बदलाव एक मापने योग्य दोष से जुड़ा",
+        "Sustainability Twin: प्रति शिफ्ट स्क्रैप, ऊर्जा और CO₂ बचत ट्रैक करें",
+        "ऑन-द-जॉब प्रशिक्षण जो स्केल करता है — सीनियर ऑपरेटर की छुट्टी पर भी",
+      ],
+      tryAsking: "Coach से पूछें:",
+      suggestions: [
+        "8 mm माइल्ड स्टील काटते समय फोकस पोज़िशन क्यों ज़रूरी है?",
+        "स्टेनलेस स्टील पर साफ़ एज कैसे पाएँ?",
+        "Cutting Assistant स्क्रैप और CO₂ कैसे कम करता है?",
+      ],
+      askButton: "Coach से पूछें",
+      closeButton: "बंद करें",
     },
     how: {
       title: "सरल संचालन, डायलॉग-गाइडेड",

@@ -321,9 +321,19 @@ export function setChatbotLang(lang: LangCode): void {
   if (mounted) render();
 }
 
-export function openChatbot(): void {
+export function openChatbot(prefill?: string): void {
   if (!mounted) return;
   isOpen = true;
   render();
-  setTimeout(() => document.getElementById("cb-input")?.focus(), 50);
+  setTimeout(() => {
+    const input = document.getElementById("cb-input") as HTMLInputElement | null;
+    if (!input) return;
+    if (prefill && !isSending) {
+      input.value = prefill;
+    }
+    input.focus();
+    if (prefill) {
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+  }, 50);
 }

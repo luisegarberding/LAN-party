@@ -19,6 +19,7 @@ const root = document.querySelector<HTMLDivElement>("#app");
 if (!root) throw new Error("Missing #app root");
 
 let currentLang: LangCode = getInitialLang();
+let coachEscBound = false;
 
 function escape(value: string): string {
   return value
@@ -26,6 +27,10 @@ function escape(value: string): string {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function inlineFormat(value: string): string {
+  return escape(value).replace(/\*([^*]+)\*/g, "<em>$1</em>");
 }
 
 function render(lang: LangCode): void {
@@ -164,16 +169,35 @@ function render(lang: LangCode): void {
           </div>
           <div class="cards">
             ${t.advantages.items
-              .map(
-                (a, i) => `
-              <article class="card">
-                <div class="card-media" style="background-image:url('${advantageImages[i]}')"></div>
+              .map((a, i) => {
+                const isCoach = i === 2;
+                const cardClass = isCoach ? "card card--feature" : "card";
+                const interactiveAttrs = isCoach
+                  ? `data-feature="coach" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="coach-modal" aria-label="${escape(a.title)} — ${escape(t.coach.askButton)}"`
+                  : "";
+                const mediaBg = isCoach
+                  ? "/coach.png"
+                  : advantageImages[i];
+                const badge = isCoach
+                  ? `<span class="card-badge">${escape(t.coach.badge)}</span>`
+                  : "";
+                return `
+              <article class="${cardClass}" ${interactiveAttrs}>
+                <div class="card-media" style="background-image:url('${mediaBg}')">${badge}</div>
                 <div class="card-body">
                   <h3>${escape(a.title)}</h3>
-                  <p>${escape(a.body)}</p>
+                  <p>${inlineFormat(a.body)}</p>
+                  ${
+                    isCoach && a.cta
+                      ? `<button type="button" class="card-cta" data-feature="coach" aria-controls="coach-modal">
+                          ${escape(a.cta)}
+                          <span aria-hidden="true">→</span>
+                        </button>`
+                      : ""
+                  }
                 </div>
-              </article>`,
-              )
+              </article>`;
+              })
               .join("")}
           </div>
         </div>
@@ -216,6 +240,54 @@ function render(lang: LangCode): void {
         </div>
       </div>
     </footer>
+
+    <div class="coach-modal" id="coach-modal" hidden aria-hidden="true">
+      <div class="coach-modal__backdrop" data-coach-close></div>
+      <div class="coach-modal__panel" role="dialog" aria-modal="true" aria-labelledby="coach-modal-title">
+        <button type="button" class="coach-modal__close" data-coach-close aria-label="${escape(t.coach.closeButton)}">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+
+        <div class="coach-modal__header">
+          <span class="coach-modal__badge">${escape(t.coach.badge)}</span>
+          <span class="coach-modal__eyebrow">${escape(t.coach.eyebrow)}</span>
+          <h2 id="coach-modal-title">${escape(t.coach.title)}</h2>
+          <p class="coach-modal__lead">${inlineFormat(t.coach.lead)}</p>
+        </div>
+
+        <ul class="coach-modal__bullets">
+          ${t.coach.bullets
+            .map(
+              (b) => `<li>
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                  <path fill="currentColor" d="m9 16.17-3.88-3.88L3.7 13.7 9 19l11-11-1.41-1.41z"/>
+                </svg>
+                <span>${inlineFormat(b)}</span>
+              </li>`,
+            )
+            .join("")}
+        </ul>
+
+        <div class="coach-modal__try">
+          <div class="coach-modal__try-label">${escape(t.coach.tryAsking)}</div>
+          <div class="coach-modal__suggestions">
+            ${t.coach.suggestions
+              .map(
+                (s) =>
+                  `<button type="button" class="coach-chip" data-coach-suggestion="${escape(s)}">${escape(s)}</button>`,
+              )
+              .join("")}
+          </div>
+        </div>
+
+        <div class="coach-modal__actions">
+          <button type="button" class="btn btn-primary" id="coach-ask">${escape(t.coach.askButton)}</button>
+          <button type="button" class="btn btn-ghost" data-coach-close>${escape(t.coach.closeButton)}</button>
+        </div>
+      </div>
+    </div>
   `;
 
   const select = root!.querySelector<HTMLSelectElement>("#lang-select");
@@ -235,6 +307,71 @@ function render(lang: LangCode): void {
   root!.querySelectorAll<HTMLElement>("[data-mock]").forEach((el) => {
     el.addEventListener("click", (e) => e.preventDefault());
   });
+
+  const modal = document.getElementById("coach-modal");
+  const openCoachModal = (): void => {
+    if (!modal) return;
+    modal.hidden = false;
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("coach-modal-open");
+    setTimeout(
+      () => modal.querySelector<HTMLButtonElement>("#coach-ask")?.focus(),
+      50,
+    );
+  };
+  const closeCoachModal = (): void => {
+    if (!modal) return;
+    modal.hidden = true;
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("coach-modal-open");
+  };
+
+  root!.querySelectorAll<HTMLElement>('[data-feature="coach"]').forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      openCoachModal();
+    });
+    el.addEventListener("keydown", (e) => {
+      const key = (e as KeyboardEvent).key;
+      if (key === "Enter" || key === " ") {
+        e.preventDefault();
+        openCoachModal();
+      }
+    });
+  });
+
+  modal?.querySelectorAll<HTMLElement>("[data-coach-close]").forEach((el) => {
+    el.addEventListener("click", () => closeCoachModal());
+  });
+
+  modal
+    ?.querySelectorAll<HTMLButtonElement>("[data-coach-suggestion]")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const text = btn.dataset.coachSuggestion?.trim() ?? "";
+        closeCoachModal();
+        openChatbot(text);
+      });
+    });
+
+  modal
+    ?.querySelector<HTMLButtonElement>("#coach-ask")
+    ?.addEventListener("click", () => {
+      closeCoachModal();
+      openChatbot();
+    });
+
+  if (!coachEscBound) {
+    coachEscBound = true;
+    document.addEventListener("keydown", (e) => {
+      const m = document.getElementById("coach-modal");
+      if (e.key === "Escape" && m && !m.hidden) {
+        m.hidden = true;
+        m.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("coach-modal-open");
+      }
+    });
+  }
 }
 
 render(currentLang);
