@@ -7,6 +7,7 @@ import {
   langDir,
   type LangCode,
 } from "./i18n";
+import { mountChatbot, setChatbotLang } from "./chatbot";
 
 const advantageImages = [
   "https://images.unsplash.com/photo-1581091870622-1c6a4e0b1f0d?auto=format&fit=crop&w=1200&q=80",
@@ -146,7 +147,9 @@ function render(lang: LangCode): void {
     currentLang = code;
     setLang(code);
     render(code);
+    setChatbotLang(code);
   });
 }
 
 render(currentLang);
+mountChatbot(currentLang);

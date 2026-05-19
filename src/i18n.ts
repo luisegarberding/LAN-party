@@ -33,6 +33,18 @@ export type Translation = {
   cta: { title: string; button: string };
   footer: { copy: string };
   switcher: { label: string };
+  chatbot: {
+    title: string;
+    welcome: string[];
+    disclaimer: string;
+    placeholder: string;
+    send: string;
+    reset: string;
+    close: string;
+    launcher: string;
+    typing: string;
+    error: string;
+  };
 };
 
 export const translations: Record<LangCode, Translation> = {
@@ -92,6 +104,21 @@ export const translations: Record<LangCode, Translation> = {
     },
     footer: { copy: "TRUMPF Machine Tools Germany Sales + Service GmbH + Co. KG" },
     switcher: { label: "Sprache" },
+    chatbot: {
+      title: "Frag TRUMPF",
+      welcome: [
+        "Willkommen bei „Frag TRUMPF“. 👋 Stellen Sie uns gerne Fragen rund um den Cutting Assistant und TRUMPF im Allgemeinen. 💡",
+        "Hinweis: Die Antworten werden mithilfe von KI generiert und können Fehler enthalten.",
+      ],
+      disclaimer: "KI-generiert · Bitte wichtige Angaben prüfen",
+      placeholder: "Stellen Sie hier Ihre Frage…",
+      send: "Senden",
+      reset: "Neuer Chat",
+      close: "Schließen",
+      launcher: "Chat öffnen",
+      typing: "tippt…",
+      error: "Es gab ein Problem. Bitte versuchen Sie es später erneut.",
+    },
   },
 
   en: {
@@ -150,6 +177,21 @@ export const translations: Record<LangCode, Translation> = {
     },
     footer: { copy: "TRUMPF Machine Tools Germany Sales + Service GmbH + Co. KG" },
     switcher: { label: "Language" },
+    chatbot: {
+      title: "Ask TRUMPF",
+      welcome: [
+        "Welcome to “Ask TRUMPF”. 👋 Feel free to ask us anything about the Cutting Assistant or TRUMPF in general. 💡",
+        "Note: answers are generated using AI and may contain errors.",
+      ],
+      disclaimer: "AI-generated · please verify important information",
+      placeholder: "Type your question here…",
+      send: "Send",
+      reset: "New chat",
+      close: "Close",
+      launcher: "Open chat",
+      typing: "typing…",
+      error: "Something went wrong. Please try again later.",
+    },
   },
 
   es: {
@@ -208,6 +250,21 @@ export const translations: Record<LangCode, Translation> = {
     },
     footer: { copy: "TRUMPF Machine Tools Germany Sales + Service GmbH + Co. KG" },
     switcher: { label: "Idioma" },
+    chatbot: {
+      title: "Pregunta a TRUMPF",
+      welcome: [
+        "Bienvenido a «Pregunta a TRUMPF». 👋 Haga sus preguntas sobre el Cutting Assistant o TRUMPF en general. 💡",
+        "Nota: las respuestas se generan con IA y pueden contener errores.",
+      ],
+      disclaimer: "Generado por IA · verifique la información importante",
+      placeholder: "Escriba su pregunta aquí…",
+      send: "Enviar",
+      reset: "Nuevo chat",
+      close: "Cerrar",
+      launcher: "Abrir chat",
+      typing: "escribiendo…",
+      error: "Algo salió mal. Inténtelo de nuevo.",
+    },
   },
 
   fr: {
@@ -266,6 +323,21 @@ export const translations: Record<LangCode, Translation> = {
     },
     footer: { copy: "TRUMPF Machine Tools Germany Sales + Service GmbH + Co. KG" },
     switcher: { label: "Langue" },
+    chatbot: {
+      title: "Demandez à TRUMPF",
+      welcome: [
+        "Bienvenue sur « Demandez à TRUMPF ». 👋 N'hésitez pas à poser vos questions sur le Cutting Assistant ou TRUMPF en général. 💡",
+        "Remarque : les réponses sont générées par IA et peuvent contenir des erreurs.",
+      ],
+      disclaimer: "Généré par IA · veuillez vérifier les informations importantes",
+      placeholder: "Posez votre question ici…",
+      send: "Envoyer",
+      reset: "Nouveau chat",
+      close: "Fermer",
+      launcher: "Ouvrir le chat",
+      typing: "écrit…",
+      error: "Une erreur est survenue. Veuillez réessayer.",
+    },
   },
 
   ru: {
@@ -324,6 +396,21 @@ export const translations: Record<LangCode, Translation> = {
     },
     footer: { copy: "TRUMPF Machine Tools Germany Sales + Service GmbH + Co. KG" },
     switcher: { label: "Язык" },
+    chatbot: {
+      title: "Спроси TRUMPF",
+      welcome: [
+        "Добро пожаловать в «Спроси TRUMPF». 👋 Задавайте любые вопросы о Cutting Assistant или TRUMPF в целом. 💡",
+        "Примечание: ответы сгенерированы ИИ и могут содержать ошибки.",
+      ],
+      disclaimer: "Сгенерировано ИИ · проверяйте важную информацию",
+      placeholder: "Введите ваш вопрос…",
+      send: "Отправить",
+      reset: "Новый чат",
+      close: "Закрыть",
+      launcher: "Открыть чат",
+      typing: "печатает…",
+      error: "Что-то пошло не так. Попробуйте позже.",
+    },
   },
 
   ar: {
@@ -382,6 +469,21 @@ export const translations: Record<LangCode, Translation> = {
     },
     footer: { copy: "TRUMPF Machine Tools Germany Sales + Service GmbH + Co. KG" },
     switcher: { label: "اللغة" },
+    chatbot: {
+      title: "اسأل TRUMPF",
+      welcome: [
+        "مرحبًا بك في «اسأل TRUMPF». 👋 لا تتردد في طرح أي سؤال حول Cutting Assistant أو TRUMPF بشكل عام. 💡",
+        "ملاحظة: تُولَّد الإجابات بواسطة الذكاء الاصطناعي وقد تحتوي على أخطاء.",
+      ],
+      disclaimer: "تم إنشاؤه بواسطة الذكاء الاصطناعي · يُرجى التحقق من المعلومات الهامة",
+      placeholder: "اكتب سؤالك هنا…",
+      send: "إرسال",
+      reset: "محادثة جديدة",
+      close: "إغلاق",
+      launcher: "افتح الدردشة",
+      typing: "يكتب…",
+      error: "حدث خطأ ما. حاول مرة أخرى لاحقًا.",
+    },
   },
 
   hi: {
@@ -440,6 +542,21 @@ export const translations: Record<LangCode, Translation> = {
     },
     footer: { copy: "TRUMPF Machine Tools Germany Sales + Service GmbH + Co. KG" },
     switcher: { label: "भाषा" },
+    chatbot: {
+      title: "TRUMPF से पूछें",
+      welcome: [
+        "“TRUMPF से पूछें” में आपका स्वागत है। 👋 Cutting Assistant या TRUMPF के बारे में कोई भी सवाल पूछें। 💡",
+        "नोट: उत्तर AI द्वारा उत्पन्न होते हैं और इनमें त्रुटियाँ हो सकती हैं।",
+      ],
+      disclaimer: "AI द्वारा निर्मित · कृपया महत्वपूर्ण जानकारी सत्यापित करें",
+      placeholder: "अपना सवाल यहाँ लिखें…",
+      send: "भेजें",
+      reset: "नई चैट",
+      close: "बंद करें",
+      launcher: "चैट खोलें",
+      typing: "लिख रहा है…",
+      error: "कुछ गलत हो गया। कृपया बाद में पुनः प्रयास करें।",
+    },
   },
 };
 
