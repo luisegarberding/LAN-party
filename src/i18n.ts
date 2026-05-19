@@ -222,7 +222,7 @@ export const translations: Record<LangCode, Translation> = {
       title: "Für wen ist der Cutting Assistant?",
       subtitle: "Wählen Sie Ihre Rolle — wir zeigen, was für Sie relevant ist.",
       customers: {
-        label: "Neue Interessenten",
+        label: "Neue Kunden",
         tagline: "Verstehen Sie, was der Cutting Assistant für Ihre Fertigung leisten kann.",
       },
       productManagers: {
@@ -235,7 +235,7 @@ export const translations: Record<LangCode, Translation> = {
       },
     },
     subpages: {
-      customers: "Für neue Interessenten",
+      customers: "Für neue Kunden",
       productManagers: "Für Produktmanager",
       engineers: "Für Anwender & Techniker",
       back: "Zurück zur Startseite",
