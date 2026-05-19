@@ -1,0 +1,405 @@
+/* ----- TRUMPF brand tokens ----- */
+:root {
+  --trumpf-blue: #0079c1;
+  --trumpf-blue-dark: #005a91;
+  --trumpf-lime: #c8d400;
+  --ink: #1a1a1a;
+  --ink-muted: #5a5a5a;
+  --line: #e5e7eb;
+  --bg: #ffffff;
+  --bg-soft: #f5f6f8;
+  --radius: 4px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --container: 1240px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1.55;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--trumpf-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ----- Header / navigation ----- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  font-size: 22px;
+  color: var(--ink);
+}
+
+.logo-mark {
+  width: 14px;
+  height: 28px;
+  background: var(--trumpf-blue);
+  display: inline-block;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav a {
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.nav a:hover {
+  color: var(--trumpf-blue);
+  text-decoration: none;
+}
+
+@media (max-width: 720px) {
+  .nav {
+    display: none;
+  }
+}
+
+/* ----- Buttons ----- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 22px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--trumpf-blue);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--trumpf-blue-dark);
+  text-decoration: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.btn-ghost:hover {
+  background: var(--ink);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ----- Hero ----- */
+.hero {
+  position: relative;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.35) 50%,
+      rgba(0, 0, 0, 0.1) 100%
+    ),
+    url("https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=2000&q=80")
+      center/cover no-repeat;
+  color: #ffffff;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+}
+
+.hero .container {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--trumpf-lime);
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 5vw, 60px);
+  line-height: 1.05;
+  font-weight: 800;
+  margin: 0 0 18px;
+  max-width: 760px;
+}
+
+.hero p.lead {
+  font-size: clamp(16px, 1.4vw, 19px);
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 32px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.discover-badge {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: var(--trumpf-lime);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.1;
+  transform: rotate(-8deg);
+}
+
+@media (max-width: 720px) {
+  .discover-badge {
+    width: 72px;
+    height: 72px;
+    font-size: 12px;
+    top: 16px;
+    right: 16px;
+  }
+}
+
+/* ----- Section base ----- */
+section {
+  padding: 88px 0;
+}
+
+@media (max-width: 720px) {
+  section {
+    padding: 56px 0;
+  }
+}
+
+.section-head {
+  max-width: 760px;
+  margin-bottom: 48px;
+}
+
+.section-head h2 {
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.15;
+  font-weight: 800;
+  margin: 0 0 12px;
+}
+
+.section-head p {
+  font-size: 17px;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+/* ----- Advantages ----- */
+.advantages {
+  background: var(--bg);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 960px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card-media {
+  aspect-ratio: 16 / 10;
+  background: var(--bg-soft) center/cover no-repeat;
+  border-bottom: 4px solid var(--trumpf-blue);
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.card h3 {
+  font-size: 20px;
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+
+.card p {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 15px;
+}
+
+/* ----- How it works ----- */
+.steps {
+  background: var(--bg-soft);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 960px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.step {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 28px;
+  border-top: 4px solid var(--trumpf-blue);
+}
+
+.step-number {
+  font-size: 13px;
+  color: var(--trumpf-blue);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+.step h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.step p {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 15px;
+}
+
+/* ----- CTA ----- */
+.cta {
+  background: var(--trumpf-blue);
+  color: #fff;
+}
+
+.cta .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cta h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  margin: 0;
+  font-weight: 800;
+  max-width: 720px;
+}
+
+.cta .btn-primary {
+  background: #fff;
+  color: var(--trumpf-blue);
+}
+
+.cta .btn-primary:hover {
+  background: var(--trumpf-lime);
+  color: var(--ink);
+}
+
+/* ----- Footer ----- */
+.site-footer {
+  background: #0e0e10;
+  color: #b5b8c0;
+  padding: 40px 0;
+  font-size: 14px;
+}
+
+.site-footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-footer a {
+  color: #b5b8c0;
+}
