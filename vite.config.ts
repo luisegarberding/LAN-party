@@ -88,9 +88,21 @@ function chatProxyPlugin(apiKey: string | undefined): PluginOption {
   };
 }
 
+import { resolve } from "node:path";
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
     plugins: [chatProxyPlugin(env.OPENAI_API_KEY)],
+    build: {
+      rollupOptions: {
+        input: {
+          main: resolve(__dirname, "index.html"),
+          customers: resolve(__dirname, "customers.html"),
+          "product-managers": resolve(__dirname, "product-managers.html"),
+          engineers: resolve(__dirname, "engineers.html"),
+        },
+      },
+    },
   };
 });

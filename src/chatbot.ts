@@ -278,3 +278,10 @@ export function setChatbotLang(lang: LangCode): void {
   currentLang = lang;
   if (mounted) render();
 }
+
+export function openChatbot(): void {
+  if (!mounted) return;
+  isOpen = true;
+  render();
+  setTimeout(() => document.getElementById("cb-input")?.focus(), 50);
+}
